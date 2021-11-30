@@ -116,6 +116,6 @@ INSERT INTO [dbo].[Products]
            ,@primaryImage
            ,@createdBy
            ,@modifiedBy)
-		SET @id = SCOPE_IDENTITY()
+      SET   @id = SCOPE_IDENTITY()
 
 END

@@ -25,61 +25,61 @@ ALTER PROC [dbo].[Products_Search]
 AS
 /*------Test Code------
 
-DECLARE @pageIndex int = 0
-		,@pageSize int = 4
-		,@query nvarchar(50) = 'Cotton'
+DECLARE  @pageIndex int = 0
+        ,@pageSize int = 4
+        ,@query nvarchar(50) = 'Cotton'
 
-EXECUTE [dbo].[Products_Search]	@pageIndex
-								,@pageSize
-								,@query
+EXECUTE [dbo].[Products_Search]	 @pageIndex
+                                ,@pageSize
+                                ,@query
 
 */
 BEGIN
 
 DECLARE @offset int = @pageIndex * @pageSize
 
-SELECT p.[Id]
-      ,p.[SKU]
-      ,p.[Name]
-      ,p.[Manufacturer]
-      ,p.[Year]
-      ,p.[Description]
-      ,p.[Specifications]
+SELECT   p.[Id]
+        ,p.[SKU]
+        ,p.[Name]
+        ,p.[Manufacturer]
+        ,p.[Year]
+        ,p.[Description]
+        ,p.[Specifications]
 
-      ,pc.[Id] as CategoryId
-	  ,pc.[Name] as CategoryName
-	  ,pc.[Description] as CategoryDescription
-	  ,pc.[ImageId] as CategoryImage
+        ,pc.[Id] as CategoryId
+        ,pc.[Name] as CategoryName
+        ,pc.[Description] as CategoryDescription
+        ,pc.[ImageId] as CategoryImage
 
-	  ,pst.[Id] as SizeId
-      ,pst.[Name] as SizeType
+        ,pst.[Id] as SizeId
+        ,pst.[Name] as SizeType
 
-	  ,c.[Id] as ColorId
-      ,c.[Name] as ColorName
-	  ,c.[Hex] as ColorHex
+        ,c.[Id] as ColorId
+        ,c.[Name] as ColorName
+        ,c.[Hex] as ColorHex
 
-	  ,pct.[Id] as ConditionId
-      ,pct.[Name] as ConditionType
+        ,pct.[Id] as ConditionId
+        ,pct.[Name] as ConditionType
 
-      ,p.[Material]
-      ,p.[IsVisible]
-      ,p.[IsActive]
-      ,p.[PrimaryImage]
+        ,p.[Material]
+        ,p.[IsVisible]
+        ,p.[IsActive]
+        ,p.[PrimaryImage]
 
-	  ,up.[UserId] as CreatedById
-	  ,up.[FirstName] as CreatedByFirstName
-	  ,up.[LastName] as CreatedByLastName
-	  ,up.[AvatarUrl] as CreatedByAvatarUrl
+        ,up.[UserId] as CreatedById
+        ,up.[FirstName] as CreatedByFirstName
+        ,up.[LastName] as CreatedByLastName
+        ,up.[AvatarUrl] as CreatedByAvatarUrl
 
-	  ,up2.[UserId] as ModifiedById
-	  ,up2.[FirstName] as ModifiedByFirstName
-	  ,up2.[LastName] as ModifiedByLastName
-	  ,up2.[AvatarUrl] as ModifiedByAvatarUrl
+        ,up2.[UserId] as ModifiedById
+        ,up2.[FirstName] as ModifiedByFirstName
+        ,up2.[LastName] as ModifiedByLastName
+        ,up2.[AvatarUrl] as ModifiedByAvatarUrl
 
-	  ,p.[DateCreated]
-      ,p.[DateModified]
+        ,p.[DateCreated]
+        ,p.[DateModified]
 
-	  ,[TotalCount] = COUNT(1) OVER()
+        ,[TotalCount] = COUNT(1) OVER()
 
   FROM [dbo].[Products] as p
   inner join [dbo].[UserProfiles] as up
@@ -96,16 +96,16 @@ SELECT p.[Id]
 	on p.CategoryId = pc.CategoryId
 
 	WHERE
-      (p.[Name] LIKE '%' + @query + '%' OR
-	  p.[Manufacturer] LIKE '%' + @query + '%' OR
-      p.[Description] LIKE '%' + @query + '%' OR
-      p.[Specifications] LIKE '%' + @query + '%' OR
-	  pc.[Name] LIKE '%' + @query + '%' OR
-	  pc.[Description] LIKE '%' + @query + '%' OR
-      pst.[Name] LIKE '%' + @query + '%' OR
-      c.[Name] LIKE '%' + @query + '%' OR
-      pct.[Name] LIKE '%' + @query + '%' OR
-      p.[Material] LIKE '%' + @query + '%')
+        (p.[Name] LIKE '%' + @query + '%' OR
+        p.[Manufacturer] LIKE '%' + @query + '%' OR
+        p.[Description] LIKE '%' + @query + '%' OR
+        p.[Specifications] LIKE '%' + @query + '%' OR
+        pc.[Name] LIKE '%' + @query + '%' OR
+        pc.[Description] LIKE '%' + @query + '%' OR
+        pst.[Name] LIKE '%' + @query + '%' OR
+        c.[Name] LIKE '%' + @query + '%' OR
+        pct.[Name] LIKE '%' + @query + '%' OR
+        p.[Material] LIKE '%' + @query + '%')
 
   ORDER BY p.[Id]
 
