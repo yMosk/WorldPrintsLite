@@ -29,7 +29,7 @@ DECLARE  @pageIndex int = 0
         ,@pageSize int = 4
         ,@createdBy int = 1
 
-EXECUTE [dbo].[Products_Select_ByCreatedBy]	 @pageIndex
+EXECUTE [dbo].[Products_Select_ByCreatedBy]  @pageIndex
                                             ,@pageSize
                                             ,@createdBy
 

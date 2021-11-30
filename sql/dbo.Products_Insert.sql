@@ -40,40 +40,40 @@ AS
 /*------Test Code------
 
 DECLARE @sku nvarchar(50) = 'RB'
-		,@name nvarchar(255) = 'Insert test'
-		,@manufacturer nvarchar(100) = 'Insert test'
-		,@year int = 1
-		,@description nvarchar(4000) = 'Insert test'
-		,@specifications nvarchar(max) = 'Insert test'
-		,@categoryId int = 1
-		,@productSizeTypeId int = 1
-		,@colorId int = 1
-		,@conditionTypeId int = 1
-		,@material nvarchar(250) = 'Insert test'
-		,@isVisible bit = 1
-		,@isActive bit = 1
-		,@primaryImage nvarchar(250) = 'Insert test'
-		,@createdBy int = 1 
-		,@modifiedBy int = 1
-		,@id int = 0
+      ,@name nvarchar(255) = 'Insert test'
+      ,@manufacturer nvarchar(100) = 'Insert test'
+      ,@year int = 1
+      ,@description nvarchar(4000) = 'Insert test'
+      ,@specifications nvarchar(max) = 'Insert test'
+      ,@categoryId int = 1
+      ,@productSizeTypeId int = 1
+      ,@colorId int = 1
+      ,@conditionTypeId int = 1
+      ,@material nvarchar(250) = 'Insert test'
+      ,@isVisible bit = 1
+      ,@isActive bit = 1
+      ,@primaryImage nvarchar(250) = 'Insert test'
+      ,@createdBy int = 1 
+      ,@modifiedBy int = 1
+      ,@id int = 0
 
-EXECUTE [dbo].[Products_Insert]	@sku
-								,@name
-								,@manufacturer
-								,@year
-								,@description
-								,@specifications
-								,@categoryId
-								,@productSizeTypeId
-								,@colorId
-								,@conditionTypeId
-								,@material
-								,@isVisible
-								,@isActive
-								,@primaryImage
-								,@createdBy
-								,@modifiedBy
-								,@id OUTPUT
+EXECUTE [dbo].[Products_Insert] @sku
+                              ,@name
+                              ,@manufacturer
+                              ,@year
+                              ,@description
+                              ,@specifications
+                              ,@categoryId
+                              ,@productSizeTypeId
+                              ,@colorId
+                              ,@conditionTypeId
+                              ,@material
+                              ,@isVisible
+                              ,@isActive
+                              ,@primaryImage
+                              ,@createdBy
+                              ,@modifiedBy
+                              ,@id OUTPUT
 
 SELECT *
 FROM dbo.Products

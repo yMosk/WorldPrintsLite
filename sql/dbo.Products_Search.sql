@@ -81,7 +81,7 @@ SELECT   p.[Id]
 
         ,[TotalCount] = COUNT(1) OVER()
 
-  FROM [dbo].[Products] as p
+FROM [dbo].[Products] as p
   inner join [dbo].[UserProfiles] as up
 	on p.CreatedBy = up.UserId 
   inner join [dbo].[UserProfiles] as up2
@@ -95,8 +95,7 @@ SELECT   p.[Id]
   inner join [dbo].[ProductCategory] as pc
 	on p.CategoryId = pc.CategoryId
 
-	WHERE
-        (p.[Name] LIKE '%' + @query + '%' OR
+WHERE   (p.[Name] LIKE '%' + @query + '%' OR
         p.[Manufacturer] LIKE '%' + @query + '%' OR
         p.[Description] LIKE '%' + @query + '%' OR
         p.[Specifications] LIKE '%' + @query + '%' OR
@@ -107,7 +106,7 @@ SELECT   p.[Id]
         pct.[Name] LIKE '%' + @query + '%' OR
         p.[Material] LIKE '%' + @query + '%')
 
-  ORDER BY p.[Id]
+ORDER BY p.[Id]
 
 OFFSET @offSet Rows
 FETCH NEXT @pageSize Rows ONLY 

@@ -38,7 +38,7 @@ ALTER PROC [dbo].[Products_Update]
 AS
 /*------Test Code------
 
-DECLARE @sku nvarchar(50) = 'RB'
+DECLARE  @sku nvarchar(50) = 'RB'
 		,@name nvarchar(255) = 'Update test'
 		,@manufacturer nvarchar(100) = 'Update test'
 		,@year int = 2020
@@ -59,7 +59,7 @@ SELECT *
 FROM dbo.Products
 WHERE Id = @id
 
-EXECUTE [dbo].[Products_Update]	@sku
+EXECUTE [dbo].[Products_Update]  @sku
 								,@name
 								,@manufacturer
 								,@year
