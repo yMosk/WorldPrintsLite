@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Sabio.Models;
@@ -8,9 +7,6 @@ using Sabio.Services;
 using Sabio.Web.Controllers;
 using Sabio.Web.Models.Responses;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sabio.Web.Api.Controllers
 {
@@ -27,7 +23,6 @@ namespace Sabio.Web.Api.Controllers
             _authService = authSerice;
         }
 
-        // GET api/product/search/?pageIndex=0&pageSize=4&query=Cotton
         [HttpGet("search")]
         public ActionResult<ItemResponse<Paged<Product>>> Search(int pageIndex, int pageSize, string query)
         {
@@ -55,7 +50,6 @@ namespace Sabio.Web.Api.Controllers
             return StatusCode(iCode, response);
         }
 
-        // GET api/product/paginate/?pageIndex=0&pageSize=4
         [HttpGet("paginate")]
         public ActionResult<ItemResponse<Paged<Product>>> GetAllPaginated(int pageIndex, int pageSize)
         {
@@ -83,7 +77,6 @@ namespace Sabio.Web.Api.Controllers
             return StatusCode(iCode, response);
         }
 
-        // GET api/product/{id:int}
         [HttpGet("{id:int}")]
         public ActionResult<ItemResponse<Product>> GetById(int id)
         {
@@ -113,7 +106,6 @@ namespace Sabio.Web.Api.Controllers
             return StatusCode(iCode, response);
         }
 
-        // GET api/product/current/?pageIndex=0&pageSize=4
         [HttpGet("current")]
         public ActionResult<ItemResponse<Paged<Product>>> GetCurrent(int pageIndex, int pageSize)
         {
@@ -142,7 +134,6 @@ namespace Sabio.Web.Api.Controllers
             return StatusCode(iCode, response);
         }
 
-        // POST api/product
         [HttpPost("")]
         public ActionResult<ItemResponse<int>> Create(ProductAddRequest product)
         {
@@ -163,7 +154,6 @@ namespace Sabio.Web.Api.Controllers
             return StatusCode(iCode, response);
         }
 
-        // PUT api/product/{id:int}
         [HttpPut("{id:int}")]
         public ActionResult<SuccessResponse> Update(ProductUpdateRequest product)
         {
@@ -184,7 +174,6 @@ namespace Sabio.Web.Api.Controllers
             return StatusCode(iCode, response); ;
         }
 
-        // DELETE api/product/{id:int}
         [HttpDelete("{id:int}")]
         public ActionResult<SuccessResponse> Delete(int id)
         {
