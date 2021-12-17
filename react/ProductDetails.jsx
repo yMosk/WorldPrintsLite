@@ -74,16 +74,6 @@ class ProductDetails extends React.Component {
         <Row className="justify-content-center">
           <Col lg="6">
             <Card className="shadow-xxl mb-5">
-              <div className="card-tr-actions">
-                <Button
-                  href="/product"
-                  size="sm"
-                  color="dark"
-                  className="mt-2 hover-scale-sm btn-pill px-4"
-                >
-                  Back
-                </Button>
-              </div>
               <div className="card-header bg-secondary text-center pt-4 pb-3">
                 <div className="avatar-icon-wrapper shadow-xxl border-white border-3 m-0">
                   <div className="d-block p-0 avatar-icon-wrapper m-0 100">
@@ -98,7 +88,7 @@ class ProductDetails extends React.Component {
                   {this.state.formData.name}
                 </h3>
                 <Badge
-                  color="dark"
+                  color="primary"
                   className="mt-1 mb-4 font-size-xs px-4 py-1 h-auto"
                 >
                   $30.00
@@ -252,7 +242,7 @@ class ProductDetails extends React.Component {
                   </Col>
                 </Row>
                 <Row className="no-gutters bg-secondary m-3 py-3 px-0 justify-content-center rounded">
-                  <Button color="dark" className="badge-wrapper m-3">
+                  <Button color="primary" className="badge-wrapper m-3">
                     <Badge
                       color={this.state.visibleBadge}
                       className="badge-position badge-position--top-right badge-circle-inner"
@@ -264,7 +254,7 @@ class ProductDetails extends React.Component {
                     </span>
                     <span className="btn-wrapper--label">Is visible</span>
                   </Button>
-                  <Button color="dark" className="badge-wrapper m-3">
+                  <Button color="primary" className="badge-wrapper m-3">
                     <Badge
                       color={this.state.activeBadge}
                       className="badge-position badge-position--top-right badge-circle-inner"
@@ -275,16 +265,6 @@ class ProductDetails extends React.Component {
                       <FontAwesomeIcon icon={["far", "lightbulb"]} />
                     </span>
                     <span className="btn-wrapper--label">Is active</span>
-                  </Button>
-                </Row>
-                <Row className="no-gutters bg-secondary m-3 py-3 px-0 justify-content-center rounded">
-                  <Button
-                    // onClick={onOrderClick}
-                    size="large"
-                    color="dark"
-                    className="mt-2 hover-scale-sm btn-pill px-4"
-                  >
-                    Order
                   </Button>
                 </Row>
               </div>

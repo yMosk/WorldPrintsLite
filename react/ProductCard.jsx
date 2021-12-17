@@ -7,10 +7,12 @@ function ProductCard(props) {
   const onCardClick = function () {
     props.onCardClick(product);
   };
-  const onEditClick = function () {
+  const onEditClick = function (e) {
+    e.stopPropagation();
     props.onEditClick(product);
   };
-  const onDeleteClick = function () {
+  const onDeleteClick = function (e) {
+    e.stopPropagation();
     props.onDeleteClick(product);
   };
 
@@ -37,7 +39,7 @@ function ProductCard(props) {
           <Button
             onClick={onEditClick}
             size="sm"
-            color="light"
+            color="primary"
             className="mt-2 hover-scale-sm btn-pill px-4"
           >
             Edit
@@ -45,7 +47,7 @@ function ProductCard(props) {
           <Button
             onClick={onDeleteClick}
             size="sm"
-            color="dark"
+            color="warning"
             className="mt-2 hover-scale-sm btn-pill px-4"
           >
             Delete

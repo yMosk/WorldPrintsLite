@@ -13,5 +13,6 @@ namespace Sabio.Services
         int Add(ProductAddRequest request, int userId);
         void Update(ProductUpdateRequest request, int userId);
         void Delete(int id);
+        Paged<Product> Filter(ProductFilterRequest filters, int pageIndex, int pageSize);
     }
 }

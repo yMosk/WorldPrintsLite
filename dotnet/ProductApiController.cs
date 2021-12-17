@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Sabio.Models;
@@ -24,6 +25,7 @@ namespace Sabio.Web.Api.Controllers
         }
 
         [HttpGet("search")]
+        [AllowAnonymous]
         public ActionResult<ItemResponse<Paged<Product>>> Search(int pageIndex, int pageSize, string query)
         {
             int iCode = 200;
@@ -51,6 +53,7 @@ namespace Sabio.Web.Api.Controllers
         }
 
         [HttpGet("paginate")]
+        [AllowAnonymous]
         public ActionResult<ItemResponse<Paged<Product>>> GetAllPaginated(int pageIndex, int pageSize)
         {
             int iCode = 200;
@@ -78,6 +81,7 @@ namespace Sabio.Web.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public ActionResult<ItemResponse<Product>> GetById(int id)
         {
             int iCode = 200;
@@ -190,6 +194,38 @@ namespace Sabio.Web.Api.Controllers
                 iCode = 500;
                 response = new ErrorResponse(ex.Message);
             }
+            return StatusCode(iCode, response);
+        }
+    
+        [HttpPost("filter")]
+        [AllowAnonymous]
+        public ActionResult<ItemResponse<Paged<Product>>> FilterProducts(ProductFilterRequest filters, int pageIndex, int pageSize)
+        {
+            int iCode = 200;
+            BaseResponse response = null;
+
+            try
+            {
+                Paged<Product> pagedList = _service.Filter(filters, pageIndex, pageSize);
+
+                if (pagedList == null)
+                {
+                    iCode = 404;
+                    response = new ErrorResponse("Products not found");
+                }
+                else
+                {
+                    response = new ItemResponse<Paged<Product>> { Item = pagedList };
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.ToString());
+                response = new ErrorResponse(ex.Message);
+                iCode = 500;
+            }
+
+
             return StatusCode(iCode, response);
         }
     }

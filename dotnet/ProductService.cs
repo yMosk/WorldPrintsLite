@@ -3,6 +3,7 @@ using Sabio.Data.Providers;
 using Sabio.Models;
 using Sabio.Models.Domain;
 using Sabio.Models.Requests.Product;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -187,6 +188,101 @@ namespace Sabio.Services
                  },
                  returnParameters: null
                 );
+        }
+
+        public Paged<Product> Filter(ProductFilterRequest filters, int pageIndex, int pageSize)
+        {
+            Paged<Product> pagedList = null;
+            List<Product> list = null;
+            int totalCount = 0;
+            string procName = "[dbo].[Products_Filter]";
+
+            _data.ExecuteCmd(procName,
+                inputParamMapper: delegate (SqlParameterCollection col)
+                {
+                    col.AddWithValue("@pageIndex", pageIndex);
+                    col.AddWithValue("@pageSize", pageSize);
+
+                    #region FilterParam null checks
+                    if (filters.Manufacturer != null)
+                    {
+                        col.AddWithValue("@manufacturer", filters.Manufacturer);
+                    }
+                    else
+                    {
+                        col.AddWithValue("@manufacturer", DBNull.Value);
+                    }
+                    if (filters.Material != null)
+                    {
+                        col.AddWithValue("@material", filters.Material);
+                    }
+                    else
+                    {
+                        col.AddWithValue("@material", DBNull.Value);
+                    }
+                    if (filters.Year > 0)
+                    {
+                        col.AddWithValue("@year", filters.Year);
+                    }
+                    else
+                    {
+                        col.AddWithValue("@year", DBNull.Value);
+                    }
+                    if (filters.SizeId > 0)
+                    {
+                        col.AddWithValue("@sizeId", filters.SizeId);
+                    }
+                    else
+                    {
+                        col.AddWithValue("@sizeId", DBNull.Value);
+                    }
+                    if (filters.ColorId > 0)
+                    {
+                        col.AddWithValue("@colorId", filters.ColorId);
+                    }
+                    else
+                    {
+                        col.AddWithValue("@colorId", DBNull.Value);
+                    }
+                    if (filters.ConditionId > 0)
+                    {
+                        col.AddWithValue("@conditionId", filters.ConditionId);
+                    }
+                    else
+                    {
+                        col.AddWithValue("@conditionId", DBNull.Value);
+                    }
+                    if (filters.CategoryId > 0)
+                    {
+                        col.AddWithValue("@categoryId", filters.CategoryId);
+                    }
+                    else
+                    {
+                        col.AddWithValue("@categoryId", DBNull.Value);
+                    }
+                    #endregion
+                },
+                singleRecordMapper: delegate (IDataReader reader, short set)
+                {
+                    int startingIndex = 0;
+                    Product product = MapProduct(reader, ref startingIndex);
+                    totalCount = reader.GetSafeInt32(startingIndex++);
+
+                    if (list == null)
+                    {
+                        list = new List<Product>();
+                    }
+
+                    list.Add(product);
+                }
+                );
+
+            if (list != null)
+            {
+                pagedList = new Paged<Product>(list, pageIndex, pageSize, totalCount);
+            }
+
+            return pagedList;
         }
 
         private static void AddProduct(ProductAddRequest request, SqlParameterCollection col)

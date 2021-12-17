@@ -17,7 +17,7 @@ import debug from "sabio-debug";
 import * as Yup from "yup";
 import * as productService from "@services/productService";
 import toastr from "toastr";
-import FilesUpload from "@components/formsUpload/FilesUpload";
+import FilesUpload from "@components/filesUpload/FilesUpload";
 import PropTypes from "prop-types";
 
 const _logger = debug.extend("productForm");
@@ -149,12 +149,13 @@ class ProductForm extends React.Component {
   };
 
   onSubmitSuccess = (response) => {
+    _logger(response);
     this.props.history.push("/product");
   };
 
   onSubmitError = (response) => {
-    toastr.error(`${response}`);
     _logger(response);
+    toastr.error(`${response}`);
   };
 
   mapType = (type) => (
@@ -176,7 +177,7 @@ class ProductForm extends React.Component {
                 variant="contained"
                 href="/product"
                 size="large"
-                color="grey"
+                color="inherit"
               >
                 Cancel
               </Button>

@@ -13,6 +13,19 @@ var productServices = {
   headers: { "Content-Type": "application/json" },
 };
 
+const filter = (payload, pageIndex, pageSize) => {
+  _logger("filter is firing");
+  const settings = {
+    method: "POST",
+    url: `${productServices.endpoint}/filter/?pageIndex=${pageIndex}&pageSize=${pageSize}`,
+    headers: productServices.headers,
+    data: payload,
+    withCredentials: true,
+    crossdomain: true,
+  };
+  return axios(settings).then(onGlobalSuccess).catch(onGlobalError);
+};
+
 const search = (pageIndex, pageSize, query) => {
   _logger("search is firing");
   const settings = {
@@ -79,4 +92,4 @@ const remove = (id) => {
     .catch(onGlobalError);
 };
 
-export { search, paginate, add, update, remove };
+export { search, paginate, add, update, remove, filter };
